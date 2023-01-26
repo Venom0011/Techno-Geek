@@ -4,13 +4,22 @@ function dolike( pid,uid){
 	const d={
 		uid:uid,
 		pid:pid,
-		opearion: 'like'
+		operation: 'like'
 	}
 	$.ajax({
 		url:"LikeServlet",
 		data:d,
 		success:function(data,textStatus,jqXHR){
 			console.log(data);
+			if (data.trim() == 'true')
+            {
+                let c = $(".like-counter").html();
+                c++;
+                $('.like-counter').html(c);
+            }
+            else if(data.trim()=='error'){
+				swal("Sorry!","You have already liked the post","error");
+			}
 		},
 		error:function(jqXHR,textSatus,errorThrown){
 			console.log(data)

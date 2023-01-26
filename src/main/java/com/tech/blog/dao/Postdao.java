@@ -99,14 +99,13 @@ public List<Post> getallpost(){
 	return lst;
 }
 
-	public List<Post> getpostbycatid(int catid,int userid){
+	public List<Post> getpostbycatid(int catid){
 		List<Post>lst=new ArrayList<>();
 		
 		try {
-			String q="select * from posts where catid=? and userid=?";
+			String q="select * from posts where catid=?";
 			PreparedStatement p=con.prepareStatement(q);
 			p.setInt(1, catid);
-			p.setInt(2, userid);
 			ResultSet rs=p.executeQuery();
 			
 			
@@ -116,6 +115,7 @@ public List<Post> getallpost(){
 				String pcontemt=rs.getString("pcontent");
 				String pcode=rs.getString("pcode");
 				String ppic=rs.getString("ppic");
+				int userid=rs.getInt("userid");
 				Timestamp pdate=rs.getTimestamp("pdate");
 				
 				
